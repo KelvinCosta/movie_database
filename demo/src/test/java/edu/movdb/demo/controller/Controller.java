@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.hamcrest.Matchers.is;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,15 @@ class ControllerTests {
   @Test
   void movieInfoIsJson() throws Exception {
     this.mockMvc.perform(get("/filmes/waterworld/1")).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+  }
+
+  @Test
+  void movieInfoJsonInfo() throws Exception {
+    this.mockMvc.perform(get("/filmes/waterworld/1"))
+    .andExpect(jsonPath("$.page").value("1"))
+    .andExpect(jsonPath("$.per_page").value("10"))
+    .andExpect(jsonPath("$.total").value("2770"))
+    .andExpect(jsonPath("$.total_pages").value("277"));
   }
   
 }
