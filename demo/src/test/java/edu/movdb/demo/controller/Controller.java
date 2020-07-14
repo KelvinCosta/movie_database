@@ -48,5 +48,10 @@ class ControllerTests {
     .andExpect(jsonPath("$.total").value("2770"))
     .andExpect(jsonPath("$.total_pages").value("277"));
   }
+
+  @Test
+  void movieInfoStatusOkNoPageNumber() throws Exception {
+    this.mockMvc.perform(get("/filmes/waterworld")).andExpect(status().isOk());
+  }
   
 }

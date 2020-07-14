@@ -13,12 +13,12 @@ import org.springframework.web.client.RestTemplate;
 public class Controller {
 
   @RequestMapping(
-    path = "/filmes/{movieName}/{pageNumber}", 
+    value = {"/filmes/{movieName}/{pageNumber}", "/filmes/{movieName}"}, 
     produces = "application/json; charset = UTF-8")
   public ResponseEntity<String> movieInfo(
     @PathVariable("movieName")  String movieName,
-    @PathVariable("pageNumber") String pageNumber){
-
+    @PathVariable(value = "pageNumber", required = false) String pageNumber){
+      if(pageNumber == null) {pageNumber = "1";}
       String searchURL = String.format("https://jsonmock.hackerrank.com/api/movies/search/title=%s&page=%s", movieName, pageNumber);
       RestTemplate rt = new RestTemplate();
       return rt.getForEntity(searchURL, String.class);
