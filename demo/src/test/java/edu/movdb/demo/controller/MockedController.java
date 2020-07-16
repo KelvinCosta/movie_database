@@ -2,6 +2,7 @@ package edu.movdb.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -25,15 +26,10 @@ class ControllerTests {
     assertTrue(true);
   }
 
-  // @Test
-  // void controllerNotNull(){
-  //   assertNotNull(controller);
-  // }
-
-  // @Test
-  // void smokeTest(){
-  //   assertNotNull(mockMvc);
-  // }
+  @Test
+  void smokeTest(){
+    assertNotNull(controller);
+  }
 
   // @Test
   // void movieInfoStatusOk() throws Exception {
