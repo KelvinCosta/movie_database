@@ -8,20 +8,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 @RestController
 public class Controller {
 
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  } 
+
+  @Autowired
+  private RestTemplate rt;
+
   @RequestMapping(
     value = {"/filmes/{movieName}/{pageNumber}", "/filmes/{movieName}"}, 
     produces = "application/json; charset = UTF-8")
-  public ResponseEntity<String> movieInfo(
+  public String movieInfo(
     @PathVariable("movieName")  String movieName,
     @PathVariable(value = "pageNumber", required = false) String pageNumber){
       if(pageNumber == null) {pageNumber = "1";}
       String searchURL = String.format("https://jsonmock.hackerrank.com/api/movies/search/title=%s&page=%s", movieName, pageNumber);
-      RestTemplate rt = new RestTemplate();
-      return rt.getForEntity(searchURL, String.class);
+      ResponseEntity<String> resp = rt.getForEntity(searchURL, String.class);
+      System.out.println("AQUI KCT..." + resp.getBody());
+      return resp.getStatusCode() == HttpStatus.OK ? resp.getBody() : null;
   }
 
 }
