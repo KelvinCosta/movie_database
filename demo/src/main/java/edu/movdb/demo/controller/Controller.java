@@ -20,7 +20,7 @@ public class Controller {
   } 
 
   @Autowired
-  private RestTemplate rt;
+  private RestTemplate restTemplate;
 
   @RequestMapping(
     value = {"/filmes/{movieName}/{pageNumber}", "/filmes/{movieName}"}, 
@@ -30,8 +30,7 @@ public class Controller {
     @PathVariable(value = "pageNumber", required = false) String pageNumber){
       if(pageNumber == null) {pageNumber = "1";}
       String searchURL = String.format("https://jsonmock.hackerrank.com/api/movies/search/title=%s&page=%s", movieName, pageNumber);
-      ResponseEntity<String> resp = rt.getForEntity(searchURL, String.class);
-      System.out.println("AQUI KCT..." + resp.getBody());
+      ResponseEntity<String> resp = restTemplate.getForEntity(searchURL, String.class);
       return resp.getStatusCode() == HttpStatus.OK ? resp.getBody() : null;
   }
 
