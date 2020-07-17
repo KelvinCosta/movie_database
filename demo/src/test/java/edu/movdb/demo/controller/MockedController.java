@@ -2,7 +2,7 @@ package edu.movdb.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.mockito.Mock;
@@ -33,10 +33,8 @@ class ControllerTests {
 
   @BeforeEach
   public void init (){
-      ResponseEntity mockResp = new ResponseEntity<String>("", HttpStatus.OK);
-      MockitoAnnotations.initMocks(this);
       when(
-        controller.movieInfo("waterworld", "1")).thenReturn("");
+        controller.movieInfo(anyString(), anyString())).thenReturn(new ResponseEntity<String>("Retorno", HttpStatus.OK));
   }
 
   @Test
@@ -46,8 +44,9 @@ class ControllerTests {
 
   @Test
   void mockTest() {
-    String resp = controller.movieInfo("waterland", "1");
-    assertEquals("", resp);
+    ResponseEntity<String> resp = controller.movieInfo("waterland", "1");
+    assertEquals("Retorno", resp.getBody());
+    assertEquals(HttpStatus.OK, resp.getStatusCode());
   }
 
   // @Test

@@ -25,13 +25,13 @@ public class Controller {
   @RequestMapping(
     value = {"/filmes/{movieName}/{pageNumber}", "/filmes/{movieName}"}, 
     produces = "application/json; charset = UTF-8")
-  public String movieInfo(
+  public ResponseEntity<String> movieInfo(
     @PathVariable("movieName")  String movieName,
     @PathVariable(value = "pageNumber", required = false) String pageNumber){
       if(pageNumber == null) {pageNumber = "1";}
-      String searchURL = String.format("https://jsonmock.hackerrank.com/api/movies/search/title=%s&page=%s", movieName, pageNumber);
+      String searchURL = String.format("https://jsonmock.hackerrank.com/api/movies/search/?Title=%s&page=%s", movieName, pageNumber);
       ResponseEntity<String> resp = restTemplate.getForEntity(searchURL, String.class);
-      return resp.getStatusCode() == HttpStatus.OK ? resp.getBody() : null;
+      return resp;
   }
 
 }
