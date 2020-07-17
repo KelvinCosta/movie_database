@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 @SpringBootTest
 class ControllerTests {
@@ -33,8 +35,10 @@ class ControllerTests {
 
   @BeforeEach
   public void init (){
+    HttpHeaders header = new HttpHeaders();
+    header.setContentType(MediaType.APPLICATION_JSON);
       when(
-        controller.movieInfo(anyString(), anyString())).thenReturn(new ResponseEntity<String>("Retorno", HttpStatus.OK));
+        controller.movieInfo(anyString(), anyString())).thenReturn(new ResponseEntity<String>("Retorno", header, HttpStatus.OK));
   }
 
   @Test
@@ -45,8 +49,10 @@ class ControllerTests {
   @Test
   void mockTest() {
     ResponseEntity<String> resp = controller.movieInfo("waterland", "1");
+    System.out.println("HEADER:" + resp.getHeaders().getContentType());
     assertEquals("Retorno", resp.getBody());
     assertEquals(HttpStatus.OK, resp.getStatusCode());
+    assertEquals(MediaType.APPLICATION_JSON, resp.getHeaders().getContentType());
   }
 
   // @Test
