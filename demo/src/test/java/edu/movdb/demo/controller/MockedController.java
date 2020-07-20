@@ -2,23 +2,23 @@ package edu.movdb.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.mockito.MockitoAnnotations;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.json.simple.JSONObject;
+
 
 @SpringBootTest
 class ControllerTests {
@@ -70,12 +70,5 @@ class ControllerTests {
     assertTrue(actual.contains("total") && actual.contains("573"));
     assertTrue(actual.contains("total_pages") && actual.contains("58"));
   }
-
-  // @Test
-  // void movieInfoStatusOkNoPageNumber() throws Exception {
-  //   ResponseEntity<String> resp = controller.movieInfo("waterland");
-  //   assertEquals(HttpStatus.OK, resp.getStatusCode());
-  //   assertEquals(MediaType.APPLICATION_JSON, resp.getHeaders().getContentType());
-  // }
   
 }
