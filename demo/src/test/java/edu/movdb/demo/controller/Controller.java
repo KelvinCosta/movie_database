@@ -31,8 +31,15 @@ class ControllerTests {
   }
 
   @Test
-  void statusCode200() throws Exception {
+  void home200() throws Exception {
     mockMvc.perform(get("/")).andExpect(status().isOk());
   }
+
+  @Test
+  void page404() throws Exception {
+    mockMvc.perform(get("/nonnon")).andExpect(status().isNotFound());
+  }
+
+
 
 }
