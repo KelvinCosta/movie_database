@@ -39,8 +39,8 @@ public class Movie {
   @Override
   public String toString() {
     return "{" + 
-    "\"Title\":\"" + title + "\"" +
-    "\"Year\":\"" + year + "\"" +
+    "\"Title\":\"" + title + "\"," +
+    "\"Year\":" + year + "," +
     "\"imdbID\":\"" + imdbID + "\"" +
     "}";
   }
