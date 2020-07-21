@@ -1,5 +1,9 @@
 package edu.movdb.demo;
 
+import java.util.LinkedHashMap; 
+import java.util.Map; 
+import org.json.simple.JSONValue;
+
 public class Movie {
 
   private String title;
@@ -38,10 +42,10 @@ public class Movie {
 
   @Override
   public String toString() {
-    return "{" + 
-    "\"Title\":\"" + title + "\"," +
-    "\"Year\":" + year + "," +
-    "\"imdbID\":\"" + imdbID + "\"" +
-    "}";
+    Map obj=new LinkedHashMap(); 
+    obj.put("Title",title); 
+    obj.put("Year", year); 
+    obj.put("imdbID", imdbID); 
+    return JSONValue.toJSONString(obj); 
   }
 }

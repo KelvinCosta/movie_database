@@ -1,6 +1,7 @@
 package edu.movdb.demo;
 
 import java.util.*;
+import org.json.simple.JSONValue;
 
 public class Info {
 
@@ -60,5 +61,16 @@ public class Info {
 
   public Movie getMovie(int index){
     return movies.get(index);
+  }
+
+  @Override
+  public String toString(){
+    Map obj=new LinkedHashMap(); 
+    obj.put("page", page); 
+    obj.put("per_page", perPage); 
+    obj.put("total", total); 
+    obj.put("total_pages", totalPages);
+    obj.put("data", movies);
+    return JSONValue.toJSONString(obj); 
   }
 }

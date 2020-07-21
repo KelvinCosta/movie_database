@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import jdk.nashorn.internal.AssertsEnabled;
-
 class MovieTests {
 
   Movie movie = new Movie("Teste", 2020, "kelvin_costa");

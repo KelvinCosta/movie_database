@@ -40,6 +40,4 @@ class ControllerTests {
     mockMvc.perform(get("/nonnon")).andExpect(status().isNotFound());
   }
 
-
-
 }
